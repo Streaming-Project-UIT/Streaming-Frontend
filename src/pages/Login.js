@@ -30,7 +30,8 @@ const Login = () => {
 
         if (response.ok) {
             alert('User Login!');
-            console.log("user id: ", response.body.username);
+            const data = await response.json();
+            console.log("user id: ", data.username);
             navigate('/');
         } else {
             const data = await response.json();

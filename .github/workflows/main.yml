@@ -25,7 +25,7 @@ jobs:
 
   build-and-deploy-react:
     name: Build and Deploy React
-    runs-on: ubuntu-latest
+    runs-on: container-build-react
     steps:
       - name: Build Docker Image
         uses: docker/build-push-action@v2

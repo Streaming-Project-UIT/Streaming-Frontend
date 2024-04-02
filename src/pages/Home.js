@@ -23,9 +23,6 @@ const Home = () => {
     fetchVideoIds();
   }, []);
 
-  const handleButtonClick = () => {
-    setShowVideo(true);
-  };
 
   const generateVideoUrls = () => {
     return videoIds.map((id) => `http://localhost:8080/video/get/${id}`);
@@ -34,19 +31,13 @@ const Home = () => {
   return (
     <div>
       <h2>Video Player</h2>
-      {showVideo ? (
         <div>
-          {generateVideoUrls().map((url, index) => (
-            <video key={index} controls>
-              <source src={url} type="video/mp4" />
-            </video>
-          ))}
+        {generateVideoUrls().map((url, index) => (
+          <video key={index} controls>
+            <source src={url} type="video/mp4" />
+          </video>
+        ))}
         </div>
-      ) : (
-        <button onClick={handleButtonClick} className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Show video
-        </button>
-      )}
     </div>
   );
 };

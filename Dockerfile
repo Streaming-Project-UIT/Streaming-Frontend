@@ -1,23 +1,23 @@
-# Use an official Node.js image as the base image
-FROM node:18-alpine
+# Sử dụng image Node.js chính thức làm image cơ sở
+FROM node:14-alpine
 
-# Set the working directory in the container
+# Thiết lập thư mục làm việc trong container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# Sao chép package.json và package-lock.json vào thư mục làm việc
 COPY package*.json ./
 
-# Install dependencies
+# Cài đặt các phụ thuộc
 RUN npm install
 
-# Copy the remaining application code to the working directory
+# Sao chép phần còn lại của mã ứng dụng vào thư mục làm việc
 COPY . .
 
-# Build the React app
+# Xây dựng ứng dụng React
 RUN npm run build
 
-# Expose the port the app runs on
+# Mở cổng mà ứng dụng chạy trên
 EXPOSE 3000
 
-# Command to run the React app
+# Lệnh để chạy ứng dụng React
 CMD ["npm", "start"]

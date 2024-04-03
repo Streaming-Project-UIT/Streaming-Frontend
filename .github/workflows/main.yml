@@ -20,13 +20,10 @@ jobs:
     #   uses: actions/setup-node@v3
     #   with:
     #     node-version: ${{ matrix.node-version }}
-    - name: Install dependencies
-      run: npm install
     - name: Build CI
       run: npm ci
     - name: Build ReactApp
       run: npm run build
-    
 
   build-and-deploy-react:
     name: Build and Deploy React
@@ -36,7 +33,7 @@ jobs:
         uses: docker/build-push-action@v5.3.0
         with:
           context: .
-          file: ./Dockerfile
+          file: Dockerfile
           push: false
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-react-streaming:today
       - name: Login to Docker Hub

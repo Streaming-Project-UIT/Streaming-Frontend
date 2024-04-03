@@ -20,10 +20,8 @@ jobs:
     #   uses: actions/setup-node@v3
     #   with:
     #     node-version: ${{ matrix.node-version }}
-    - name: Build CI
-      run: npm ci
-    - name: Build ReactApp
-      run: npm run build
+    - run: npm ci
+    - run: npm install
 
   build-and-deploy-react:
     name: Build and Deploy React

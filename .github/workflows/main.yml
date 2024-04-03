@@ -22,10 +22,11 @@ jobs:
     #     node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: npm install
-    - name: Build ReactApp
-      run: npm run build
     - name: Build CI
       run: npm ci
+    - name: Build ReactApp
+      run: npm run build
+    
 
   build-and-deploy-react:
     name: Build and Deploy React

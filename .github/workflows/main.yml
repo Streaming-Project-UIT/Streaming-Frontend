@@ -29,22 +29,24 @@ jobs:
     name: Build and Deploy React
     runs-on: ubuntu-latest
     steps:
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
       - name: Build Docker Image
-        uses: docker/build-push-action@v5.3.0
+        uses: docker/build-push-action@v5
         with:
-          context: .
-          file: Dockerfile
           push: false
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-react-streaming:today
+
       - name: Login to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
       - name: Push to Docker Hub
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
-          context: .
-          file: Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-react-streaming:today

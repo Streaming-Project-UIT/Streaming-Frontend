@@ -24,6 +24,8 @@ jobs:
       run: npm ci
     - name: Build
       run: npm run build
+      env:
+        CI: ""
 
   build-and-deploy-react:
     name: Build and Deploy React
@@ -32,7 +34,7 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        
+
       - name: Build Docker Image
         uses: docker/build-push-action@v5
         with:

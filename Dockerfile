@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # pull official base image
 FROM node:18-alpine
 
@@ -18,3 +19,20 @@ COPY . ./
 
 # start app
 CMD ["npm", "start"]
+=======
+FROM node:18-alpine
+WORKDIR /home/node/app
+COPY . .
+RUN npm install
+EXPOSE 3000
+CMD ["npm", "start"]
+
+
+
+# FROM node:18-alpine as builder
+# WORKDIR /home/node/app
+
+# RUN npm ci
+# RUN npm run build
+# CMD ["npm", "start"]
+>>>>>>> 2a2f40969f651df169cdf6b37b09883fc0bb85c0

@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 const Register = () => {
     const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -17,6 +18,8 @@ const Register = () => {
           username: username,
           password: password,
           active: "true",
+          firstName: firstName,
+          lastName: lastName,
         }),
       });
 
@@ -53,7 +56,26 @@ const Register = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         className="border border-gray-300 rounded-md px-2 py-1 mb-2"
-      />
+        />
+        
+        <label htmlFor="firstName" className="mb-2">First Name:</label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          className="border border-gray-300 rounded-md px-2 py-1 mb-2"
+        />
+        <label htmlFor="lastName" className="mb-2">Last Name:</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          className="border border-gray-300 rounded-md px-2 py-1 mb-2"
+        />
 
       <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">Register</button>
       </form>

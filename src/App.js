@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import UploadVideo from './pages/UploadVideo';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 function App() {
   return (
     <Router>
@@ -14,7 +15,7 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/upload" element={<UploadVideo />} />
         <Route path="/" element={<Home />} />
-
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
     );

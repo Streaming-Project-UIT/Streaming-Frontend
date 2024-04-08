@@ -32,6 +32,9 @@ const Login = () => {
             alert('User Login!');
             const data = await response.json();
             console.log("user id: ", data.username);
+            console.log("user token: ", data.id);   
+            const userToken = data.id;
+            localStorage.setItem('userToken', userToken);
             navigate('/');
         } else {
             const data = await response.json();

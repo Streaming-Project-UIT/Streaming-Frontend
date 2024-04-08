@@ -4,11 +4,16 @@ const UploadVideo = () => {
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-
+    const userToken = localStorage.getItem('userToken');
+    const [thumbnail, setThumbnail] = useState(null);
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
         setFile(selectedFile);
     };
+    const handleThumbnailChange = (event) => {
+        const selectedThumbnail = event.target.files[0];
+        setThumbnail(selectedThumbnail);
+    }
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
@@ -23,10 +28,11 @@ const UploadVideo = () => {
 
     try {
         const formData = new FormData();
-        formData.append('title', title);
-        formData.append('description', description);
-        formData.append('video', file);
-
+        // formData.append('title', title);
+        // formData.append('description', description);
+        formData.append('file', file);
+        formData.append('userID', userToken);
+        formData.append('thumbnail', thumbnail);
         const response = await fetch('http://localhost:8080/video/upload', {
             method: 'POST',
             body: formData,
@@ -36,7 +42,8 @@ const UploadVideo = () => {
             alert('Video uploaded!');
         } else {
             const errorText = await response.text(); // Lấy dữ liệu phản hồi dưới dạng văn bản
-            alert('Failed to upload video: ' + errorText);
+            // alert('Failed to upload video: ' + errorText);
+            console.log('Failed to upload video: ' + errorText)
         }
     } catch (error) {
         console.error('Failed to upload video:', error);
@@ -51,6 +58,10 @@ const UploadVideo = () => {
                 <div className="mb-4">
                     <label htmlFor="file" className="block">Video File:</label>
                     <input type="file" id="file" accept=".mp4" onChange={handleFileChange} className="border border-gray-300 p-2" />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="file" className="block">Thumbnail File:</label>
+                    <input type="file" id="thumbnail" accept=".png, .jpg" onChange={handleThumbnailChange} className="border border-gray-300 p-2" />
                 </div>
                 <div className="mb-4">
                     <label htmlFor="title" className="block">Title:</label>

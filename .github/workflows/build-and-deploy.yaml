@@ -15,6 +15,11 @@ jobs:
   deploy:
     name: Deploy to GKE Autopilot
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

@@ -40,7 +40,7 @@ jobs:
           docker build -t asia-east1-docker.pkg.dev/$GOOGLE_PROJECT/frontend/react_app:1.0 .
           docker push asia-east1-docker.pkg.dev/$GOOGLE_PROJECT/frontend/react_app:1.0
 
-      - name: Set cluster context
+      - name: Set cluster context 
         run: |
           gcloud container clusters get-credentials ${{ env.CLUSTER_NAME }} --zone ${{ env.ZONE }} --project ${{ env.PROJECT_ID }}
 

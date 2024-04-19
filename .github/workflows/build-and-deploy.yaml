@@ -105,6 +105,7 @@ jobs:
           docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
         fi
 
+
     - name: Push Docker Image to Artifact Registry
       env:
         GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}

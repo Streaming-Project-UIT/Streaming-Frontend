@@ -29,4 +29,4 @@ spec:
     spec:
       containers:
       - name: reactapp
-        image: asia-east1-docker.pkg.dev/$GOOGLE_PROJECT/reactapp/gke_reactapp:1.0
+        image: asia-east1-docker.pkg.dev/devops-project-419807/frontend/react_app:1.0

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+      - main
 
 env:
   PROJECT_ID: devops-project-419807

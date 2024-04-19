@@ -22,7 +22,7 @@ jobs:
       - name: Build the application
         run: |
           npm install
-          npm run build
+          npm run build 
 
       - name: Configure gcloud
         uses: google-github-actions/setup-gcloud@v2

@@ -56,7 +56,7 @@
 name: Build and Push Python Image to Google Cloud Platform
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
 # env:
 #   PROJECT_ID: devops-project-419807
 #   CLUSTER_NAME: autopilot-cluster-1

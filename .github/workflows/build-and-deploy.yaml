@@ -1,0 +1,61 @@
+name: Deploy Front-end to GKE Autopilot
+
+on:
+  push:
+    branches:
+      - dev
+
+env:
+  PROJECT_ID: devops-project-419807
+  CLUSTER_NAME: autopilot-cluster-1
+  ZONE: asia-east1
+  
+
+jobs:
+  deploy:
+    name: Deploy to GKE Autopilot
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build the application
+        run: |
+          npm ci
+          npm run build 
+        env:
+          CI: ""
+
+      - name: Authenticate
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: Configure gcloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+          install_components: 'gke-gcloud-auth-plugin'
+
+      - name: Build and Push the Docker image
+        env:
+          GOOGLE_PROJECT: ${{ env.PROJECT_ID }}
+        run: |
+          gcloud auth configure-docker asia-east1-docker.pkg.dev
+          docker build -t asia-east1-docker.pkg.dev/$GOOGLE_PROJECT/frontend/react_app:1.0 .
+          docker push asia-east1-docker.pkg.dev/$GOOGLE_PROJECT/frontend/react_app:1.0
+
+      - name: Set cluster context 
+        run: |
+          gcloud container clusters get-credentials ${{ env.CLUSTER_NAME }} --zone ${{ env.ZONE }} --project ${{ env.PROJECT_ID }}
+
+      - name: Apply Kubernetes manifests
+        run: |
+          kubectl apply -f resources.yaml 
+
+###########

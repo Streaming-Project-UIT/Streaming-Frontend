@@ -15,10 +15,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: reactapp
-  labels:
-    app: reactapp
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: gke_reactapp
@@ -29,4 +27,21 @@ spec:
     spec:
       containers:
       - name: reactapp
+        # Replace $LOCATION with your Artifact Registry location (e.g., us-west1).
+        # Replace $GCLOUD_PROJECT with your project ID.
         image: asia-east1-docker.pkg.dev/devops-project-419807/frontend/react_app:1.0
+        # This app listens on port 8080 for web traffic by default.
+        ports:
+        - containerPort: 8080
+        env:
+          - name: PORT
+            value: "8080"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+            ephemeral-storage: "1Gi"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+            ephemeral-storage: "1Gi"

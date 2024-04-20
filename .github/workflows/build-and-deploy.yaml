@@ -10,7 +10,7 @@ on:
 env:
   PROJECT_ID: devops-project-419807
   CLUSTER_NAME: cluster2
-  ZONE: asia-east1
+  ZONE: us-central1
   
 
 jobs:

@@ -9,7 +9,7 @@ spec:
     app: frontend
   ports:
   - port: 80
-    targetPort: 80
+    targetPort: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -31,8 +31,8 @@ spec:
         # Replace $GCLOUD_PROJECT with your project ID.
         image: asia-east1-docker.pkg.dev/devops-project-419807/frontend/react_app:1.0
         # This app listens on port 8080 for web traffic by default.
-        ports:
-        - containerPort: 8080
+        # ports:
+        # - containerPort: 8080
         env:
           - name: PORT
             value: "8080"

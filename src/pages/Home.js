@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const fetchVideoIds = async () => {
       try {
-        const response = await fetch('http://localhost:8080/video/getAllIds');
+        const response = await fetch(process.env.REACT_APP_URL +  '/video/getAllIds');
         if (response.ok) {
           const ids = await response.json();
           setVideoIds(ids);
@@ -25,7 +25,7 @@ const Home = () => {
 
 
   const generateVideoUrls = () => {
-    return videoIds.map((id) => `http://localhost:8080/video/get/${id}`);
+    return videoIds.map((id) => process.env.REACT_APP_URL +`/video/get/${id}`);
   };
 
   return (

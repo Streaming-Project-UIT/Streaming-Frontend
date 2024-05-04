@@ -30,7 +30,7 @@ spec:
         # Replace $LOCATION with your Artifact Registry location (e.g., us-west1).
         # Replace $GCLOUD_PROJECT with your project ID.
         image: asia-east1-docker.pkg.dev/devops-project-419807/frontend/react_app:1.0
-        # imagePullPolicy: Always
+        imagePullPolicy: Always
         # This app listens on port 8080 for web traffic by default.
         # ports:
         # - containerPort: 8080

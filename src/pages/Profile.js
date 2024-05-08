@@ -11,7 +11,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/listUserbyId/${userToken}`, {
+                const response = await fetch(process.env.REACT_APP_URL + '/listUserbyId/${userToken}', {
                     headers: {
                         Authorization: `Bearer ${userToken}`,
                     },

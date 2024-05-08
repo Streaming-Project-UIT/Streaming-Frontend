@@ -33,7 +33,7 @@ const UploadVideo = () => {
         formData.append('file', file);
         formData.append('userID', userToken);
         formData.append('thumbnail', thumbnail);
-        const response = await fetch('http://localhost:8080/video/upload', {
+        const response = await fetch(process.env.REACT_APP_URL + '/video/upload', {
             method: 'POST',
             body: formData,
         });

@@ -17,7 +17,7 @@ const Login = () => {
     try {
         event.preventDefault();
 
-        const response = await fetch(process.env.REACT_APP_URL+ '/login2', {
+        const response = await fetch(process.env.REACT_APP_URL + '/login2', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

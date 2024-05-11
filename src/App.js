@@ -16,6 +16,7 @@ function App() {
         <Route path="/upload" element={<UploadVideo />} />
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
+        
       </Routes>
     </Router>
     );

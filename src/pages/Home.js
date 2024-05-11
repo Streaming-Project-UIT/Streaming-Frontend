@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const fetchVideoIds = async () => {
       try {
-        const response = await fetch('http://backend:80/video/getAllIds');
+        const response = await fetch(process.env.REACT_APP_URL +  '/video/getAllIds');
         if (response.ok) {
           const ids = await response.json();
           setVideoIds(ids);

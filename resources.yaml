@@ -33,7 +33,7 @@ spec:
         #imagePullPolicy: Always
         # This app listens on port 8080 for web traffic by default.
         # ports:
-        containerPort: 3000
+        # -  containerPort: 3000
         env:
           - name: PORT
             value: "3000"
@@ -46,52 +46,3 @@ spec:
           limits:
             memory: 512Mi
             cpu: "1"
-
-
-            
-
-          
-
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: frontend
-# spec:
-#   type: LoadBalancer
-#   selector:
-#     app: frontend
-#   ports:
-#   - port: 80
-#     targetPort: 3000   # Chuyển hướng yêu cầu đến cổng 3000 của các container trong Deployment
-
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: frontend
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: frontend
-#   template:
-#     metadata:
-#       labels:
-#         app: frontend
-#     spec:
-#       containers:
-#       - name: frontend
-#         image: asia-east1-docker.pkg.dev/devops-project-419807/frontend/react_app:1.0
-#         ports:
-#         - containerPort: 3000   # Nghe trên cổng 3000
-#         env:
-#           - name: REACT_APP_URL
-#             value: "http://backend:8080"  # Gửi yêu cầu API đến cổng 8080 của dịch vụ backend
-#         resources:
-#           requests:
-#             memory: 256Mi
-#             cpu: "0.5"
-#           limits:
-#             memory: 512Mi
-#             cpu: "1"

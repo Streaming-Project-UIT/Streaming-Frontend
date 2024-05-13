@@ -1,57 +1,3 @@
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: frontend
-# spec:
-#   type: LoadBalancer
-#   selector:
-#     app: frontend
-#   ports:
-#   - port: 80
-#     targetPort: 3000
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: frontend
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: frontend
-#   template:
-#     metadata:
-#       labels:
-#         app: frontend
-#     spec:
-#       containers:
-#       - name: frontend
-#         # Replace $LOCATION with your Artifact Registry location (e.g., us-west1).
-#         # Replace $GCLOUD_PROJECT with your project ID.
-#         image: asia-east1-docker.pkg.dev/devops-project-419807/frontend/react_app:1.0
-#         #imagePullPolicy: Always
-#         # This app listens on port 8080 for web traffic by default.
-#         # ports:
-#         containerPort: 3000
-#         env:
-#           - name: PORT
-#             value: "3000"
-#           - name: REACT_APP_URL
-#             value: "http://backend:8080"
-#         resources:
-#           requests:
-#             memory: 256Mi
-#             cpu: "0.5"
-#           limits:
-#             memory: 512Mi
-#             cpu: "1"
-
-
-            
-
-          
-
 ---
 apiVersion: v1
 kind: Service
@@ -63,8 +9,7 @@ spec:
     app: frontend
   ports:
   - port: 80
-    targetPort: 3000   # Chuyển hướng yêu cầu đến cổng 3000 của các container trong Deployment
-
+    targetPort: 3000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -82,12 +27,18 @@ spec:
     spec:
       containers:
       - name: frontend
+        # Replace $LOCATION with your Artifact Registry location (e.g., us-west1).
+        # Replace $GCLOUD_PROJECT with your project ID.
         image: asia-east1-docker.pkg.dev/devops-project-419807/frontend/react_app:1.0
-        ports:
-        - containerPort: 3000   # Nghe trên cổng 3000
+        #imagePullPolicy: Always
+        # This app listens on port 8080 for web traffic by default.
+        # ports:
+        containerPort: 3000
         env:
+          - name: PORT
+            value: "3000"
           - name: REACT_APP_URL
-            value: "http://backend:8080"  # Gửi yêu cầu API đến cổng 8080 của dịch vụ backend
+            value: "https://backend:8080"
         resources:
           requests:
             memory: 256Mi
@@ -95,3 +46,52 @@ spec:
           limits:
             memory: 512Mi
             cpu: "1"
+
+
+            
+
+          
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: frontend
+# spec:
+#   type: LoadBalancer
+#   selector:
+#     app: frontend
+#   ports:
+#   - port: 80
+#     targetPort: 3000   # Chuyển hướng yêu cầu đến cổng 3000 của các container trong Deployment
+
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: frontend
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: frontend
+#   template:
+#     metadata:
+#       labels:
+#         app: frontend
+#     spec:
+#       containers:
+#       - name: frontend
+#         image: asia-east1-docker.pkg.dev/devops-project-419807/frontend/react_app:1.0
+#         ports:
+#         - containerPort: 3000   # Nghe trên cổng 3000
+#         env:
+#           - name: REACT_APP_URL
+#             value: "http://backend:8080"  # Gửi yêu cầu API đến cổng 8080 của dịch vụ backend
+#         resources:
+#           requests:
+#             memory: 256Mi
+#             cpu: "0.5"
+#           limits:
+#             memory: 512Mi
+#             cpu: "1"
